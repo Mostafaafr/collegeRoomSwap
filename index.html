@@ -1,0 +1,143 @@
+<!doctype html>
+
+<!-- Author: Hao Mack Yang, Mostafa, Areeb-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>College Room Swap</title>
+  <meta name="description" content="A website for swapping rooms at colleges.">
+  <meta name="author" content="SitePoint">
+
+  <meta property="og:title" content="A College Room Swap Website">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.collegeroomswap.com">
+  <meta property="og:description" content="A website to swap dorms at colleges">
+  <meta property="og:image" content="image.png">
+
+
+  <link rel="shortcut icon" type="image" href="cfaviconv2.png"/>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
+  <link rel="stylesheet" type=text/css href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.11/semantic.min.css"></link>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css"></head>
+</head>
+
+<body style="background-color: aliceblue;">
+
+<div class="flexboxContainer">
+  <div>
+    
+    <!--<h1 class="headerText" style="margin-top: 220px;">
+    College Room Swap
+    </h1>-->
+  </div>
+  <div class="d-flex justify-content-center mt-4" style="flex-direction: column; align-items: center;">
+    <img src="CollegeRoomSwapLogo.png" style="width: 40%; height: auto"></img>
+    
+
+    <select class="ui search dropdown" onchange="showDormForm()" style="width: 50%; margin-top: 20px;" id="collegeDropDown">
+      <option value="">Choose your College...</option>
+      <option value="UPenn">University of Pennsylvania</option>
+      <option value="Harvard">Harvard University</option>
+      <option value="UofT">Univeristy of Toronto</option>
+    </select>
+
+
+    <select class="ui search dropdown" onchange="showDormType()" style="width: 50%; margin-top: 20px; display: none;" id="dormForm">
+      <option value="">What Dorm are you in?</option>
+      <option value="ENG">English House</option>
+      <option value="ENG">Fisher Hassenfeld</option>
+      <option value="Harvard">Gregory</option>
+      <option value="ENG">Harnwell</option>
+      <option value="UofT">Harrison</option>
+      <option value="Harvard">Hill</option>
+      <option value="UofT">Lauder</option>
+      <option value="ENG">New College House West</option>
+      <option value="Harvard">Riepe</option>
+      <option value="UofT">Rodin</option>
+      <option value="ENG">Stouffer</option>
+      <option value="ENG">Van Pelt Manor</option>
+      <option value="Harvard">Ware</option>
+      <option value="UofT">W.E.B Du Bois</option>
+    </select>
+
+    <select class="ui search dropdown" onchange="showDormForm2()" style="width: 50%; margin-top: 20px; display: none;" id="dormType">
+      <option value="">Dorm Type</option>
+      <option value="UPenn">Single</option>
+      <option value="Harvard">Double</option>
+      <option value="UofT">Triple</option>
+      <option value="UofT">Quad</option>
+    </select>
+
+    <select class="ui search dropdown" onchange="showDormType2()" style="width: 50%; margin-top: 20px; display: none;" id="dormForm2">
+      <option value="">Which dorm are you looking to be in?</option>
+      <option value="ENG">English House</option>
+      <option value="ENG">Fisher Hassenfeld</option>
+      <option value="Harvard">Gregory</option>
+      <option value="ENG">Harnwell</option>
+      <option value="UofT">Harrison</option>
+      <option value="Harvard">Hill</option>
+      <option value="UofT">Lauder</option>
+      <option value="ENG">New College House West</option>
+      <option value="Harvard">Riepe</option>
+      <option value="UofT">Rodin</option>
+      <option value="ENG">Stouffer</option>
+      <option value="ENG">Van Pelt Manor</option>
+      <option value="Harvard">Ware</option>
+      <option value="UofT">W.E.B Du Bois</option>
+    </select>
+
+    <select class="ui search dropdown" onchange="showButton()" style="width: 50%; margin-top: 20px; display: none;" id="dormType2">
+      <option value="">Desired Dorm Type</option>
+      <option value="UPenn">Single</option>
+      <option value="Harvard">Double</option>
+      <option value="UofT">Triple</option>
+      <option value="UofT">Quad</option>
+    </select>
+
+    <h3 style="margin-top: 45px; display: none;" id="noSwaps";>
+      Unfortunately we couldn't find any matching swaps
+    </h3>
+    <form style="margin-top: 10px; display: none;" onchange="showSubmitButton()" id="emailForm">
+      <div class="form-group" >
+        <input type="email" class="form-control" id="emailFormInput" aria-describedby="emailHelp" placeholder="Enter your school email" >
+        <small id="emailHelp" class="form-text text-muted">So we can notify you when mutual swaps become available.</small>
+        </form>
+      </div>
+
+    
+
+    <button id="letsGoButton" class="btn btn-primary" type="submit" style="margin-top: 30px; width: 100px; display: none;" onclick="showEmailForm()">Let's Go</button>
+    <button id="submitButton" class="btn btn-primary" type="submit" style="width: 100px; display: none;" onclick="showResponse()">Submit</button>
+
+    <h3 id="response" style="display: none; margin-top: 40px; text-align: center;">
+Thanks so much for filling out our form! <br> We will notify you as soon as we find a mutual swapper!
+    </h3>
+
+
+    <div class="spinner-border text-info mt-5" role="status" id="spinner" style="display: none; width: 50px; height: 50px;">
+      <span class="sr-only">Loading...</span>
+    </div>
+
+    <p4>
+      <a href="#about"></a>
+    </p4>
+    <p4 style="margin-top: 60px; font-size: medium; color: purple;" id="authorText">
+      Made by Mostafa, Areeb, and Hao for PennApps XXII!
+    </p4>
+  </div>
+  
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+<script src="jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<script src="semantic/dist/semantic.min.js"></script>
+<script src="myScript.js"></script>
+</body>
